@@ -6,7 +6,7 @@ export const validate = data =>{
     const errors = {}
 
     if(!data.name.trim()){
-        errors.name = 'user name requierd'
+        errors.name = 'name is requierd'
     } else {
         delete errors.name
     }
