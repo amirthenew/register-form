@@ -1,6 +1,6 @@
 
 import React,{useState,useEffect} from "react";
-
+import { Link } from "react-router-dom";
 
 import { validate } from "./validate";
 import { ToastContainer, toast } from 'react-toastify';
@@ -102,7 +102,7 @@ if(!Object.keys(errors).length){
         {errors.isAccepted  && touched.isAccepted &&<span>{errors.isAccepted}</span>}
 
 <div className={styles.formButtons}>
-<button className={styles.login} href="#">Login</button>
+<Link className={styles.login} to="/login">Login</Link>
 <button type="submit">Sign Up</button>
 </div>
         </form>

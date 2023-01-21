@@ -1,6 +1,6 @@
 
 import React,{useState,useEffect} from "react";
-
+import { Link } from "react-router-dom";
 
 import { validate } from "./validate";
 import { ToastContainer, toast } from 'react-toastify';
@@ -74,7 +74,7 @@ if(!Object.keys(errors).length){
 
         
 <div className={styles.formButtons}>
-<button className={styles.login} href="#">SignUp</button>
+<Link className={styles.login} to="/signup">SignUp</Link>
 <button type="submit">Login</button>
 </div>
         </form>
