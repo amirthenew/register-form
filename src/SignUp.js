@@ -1,6 +1,10 @@
 
 import React,{useState,useEffect} from "react";
 import { validate } from "./validate";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+  import { notify } from "./toast";
+
 
 const SignUp = () => {
 
@@ -32,9 +36,27 @@ const focusHandler = (event) =>{
     setTouched({...touched,[event.target.name]:true})
 }
 
+const submitHandler = (event)=>{
+event.preventDefault()
+notify()
+if(!Object.keys(errors).length){
+    notify('successed','success')
+}else {
+    notify('failed','error')
+    setTouched({name : true , 
+        email : true,
+        password:true,
+        confirmPassword : true,
+        isAccepted:true
+
+    
+    })
+}
+}
+
     return ( 
         <div>
-        <form>
+        <form onSubmit={submitHandler}>
         <h2>sign up</h2>
         <div>
         <label>Name</label>
@@ -72,6 +94,7 @@ const focusHandler = (event) =>{
 <button type="submit">Sign Up</button>
 </div>
         </form>
+        <ToastContainer />
         </div>
      );
 }
