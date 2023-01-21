@@ -1,15 +1,11 @@
 //it isn't component
 
 
-export const validate = data =>{
+export const validate = (data,type) =>{
 
     const errors = {}
 
-    if(!data.name.trim()){
-        errors.name = 'name is requierd'
-    } else {
-        delete errors.name
-    }
+   
 
  
     if(!data.email){
@@ -28,20 +24,34 @@ export const validate = data =>{
             delete errors.password
         }
 
-        if(!data.confirmPassword) {
-            errors.confirmPassword = 'confirm the password'}
-            else if (data.confirmPassword !== data.password){
-                errors.confirmPassword = 'write right password !'
-            } else {
-                delete errors.confirmPassword
-            }
+       
 
+            if(type==='signup') {
 
-            if (data.isAccepted){
-                delete errors.isAccepted
-            }else{
-                errors.isAccepted='accept our rules'
+                if(!data.name.trim()){
+                    errors.name = 'name is requierd'
+                } else {
+                    delete errors.name
+                }
+
+                if(!data.confirmPassword) {
+                    errors.confirmPassword = 'confirm the password'}
+                    else if (data.confirmPassword !== data.password){
+                        errors.confirmPassword = 'write right password !'
+                    } else {
+                        delete errors.confirmPassword
+                    }
+        
+        
+                    if (data.isAccepted){
+                        delete errors.isAccepted
+                    }else{
+                        errors.isAccepted='accept our rules'
+                    }
+
             }
 
             return errors
+
+                        
 }

@@ -6,17 +6,15 @@ import { validate } from "./validate";
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
   import { notify } from "./toast";
-  import styles from './SignUp.module.css'
+  import styles from './Login.module.css'
+import SignUp from './SignUp';
 
 
-const SignUp = () => {
+const Login = () => {
 
 const [data,setData] = useState({
-    name : '',
     email : '',
     password : '',
-    confirmPassword :'',
-    isAccepted : false
 })
 
 
@@ -24,7 +22,7 @@ const [errors , setErrors] = useState({})
 const [touched , setTouched] = useState({})
 
 useEffect(()=>{
-setErrors(validate(data,'signup'))
+setErrors(validate(data,'login'))
 },[data,touched])
 
 const changeHandler = event => {
@@ -43,14 +41,13 @@ const submitHandler = (event)=>{
 event.preventDefault()
 notify()
 if(!Object.keys(errors).length){
-    notify('successed','success')
+    notify('login succeed','success')
 }else {
-    notify('failed','error')
+    notify('invalid data','error')
     setTouched({name : true , 
         email : true,
         password:true,
-        confirmPassword : true,
-        isAccepted:true
+
 
     
     })
@@ -60,19 +57,7 @@ if(!Object.keys(errors).length){
     return ( 
         <div className={styles.container}>
         <form className={styles.formContainer} onSubmit={submitHandler}>
-        <h2 className={styles.header}>sign up</h2>
-        <div>
-        <label>Name</label>
-        <br/>
-        <input className={(errors.name && touched.name) ? styles.uncompleted : styles.completed  }
-        type='text' 
-        name="name" 
-        value={data.name} 
-        onFocus={focusHandler} 
-        onChange={changeHandler} />
-        </div>
-        {errors.name && touched.name && <span>{errors.name}</span>}
-
+        <h2 className={styles.header}>Login</h2>
         <div>
         <label>Email</label>
         <br/>
@@ -87,23 +72,10 @@ if(!Object.keys(errors).length){
         </div>
         {errors.password && touched.password && <span>{errors.password}</span>}
 
-        <div>
-        <label>Confirm Password</label>
-        <br/>
-        <input type='password' name="confirmPassword" value={data.confirmPassword} onFocus={focusHandler} onChange={changeHandler} />
-        </div>
-        {errors.confirmPassword && touched.confirmPassword && <span>{errors.confirmPassword}</span>}
-
-
-        <div>
-        <input type='checkbox' name="isAccepted" value={data.isAccepted} onFocus={focusHandler} onChange={changeHandler} />
-        <label style={{'fontSize':'.6rem','paddingLeft':'.5rem'}}>i accept the rules</label>
-        </div>
-        {errors.isAccepted  && touched.isAccepted &&<span>{errors.isAccepted}</span>}
-
+        
 <div className={styles.formButtons}>
-<button className={styles.login} href="#">Login</button>
-<button type="submit">Sign Up</button>
+<button className={styles.login} href="#">SignUp</button>
+<button type="submit">Login</button>
 </div>
         </form>
         <ToastContainer />
@@ -111,4 +83,4 @@ if(!Object.keys(errors).length){
      );
 }
  
-export default SignUp;
+export default Login;
